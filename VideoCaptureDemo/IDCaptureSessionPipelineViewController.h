@@ -8,14 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, PipelineMode)
-{
-    PipelineModeMovieFileOutput = 0,
-    PipelineModeAssetWriter,
-}; // internal state machine
-
 @interface IDCaptureSessionPipelineViewController : UIViewController
 
-- (void)setupWithPipelineMode:(PipelineMode)mode;
+- (void) setup;
+
+- (void) startRunning;
+- (void) stopRunning;
 
 @end

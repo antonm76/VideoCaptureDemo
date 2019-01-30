@@ -16,7 +16,6 @@
 @interface IDCaptureSessionCoordinator : NSObject
 
 @property (nonatomic, strong) AVCaptureSession* captureSession;
-@property (nonatomic, strong) AVCaptureDevice* cameraDevice;
 @property (nonatomic, strong) dispatch_queue_t delegateCallbackQueue;
 @property (nonatomic, weak) id<IDCaptureSessionCoordinatorDelegate> delegate;
 

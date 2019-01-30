@@ -8,7 +8,6 @@
 
 #import "IDCaptureSessionPipelineViewController.h"
 #import "IDCaptureSessionAssetWriterCoordinator.h"
-#import "IDCaptureSessionMovieFileOutputCoordinator.h"
 #import "VideoCaptureDemo-Swift.h"
 
 //TODO: add backgrounding stuff
@@ -20,7 +19,6 @@
 @property (nonatomic, retain) IBOutlet UIBarButtonItem* recordButton;
 
 @property (nonatomic, assign) BOOL recording;
-@property (nonatomic, assign) BOOL dismissing;
 
 @end
 
@@ -28,31 +26,30 @@
 @implementation IDCaptureSessionPipelineViewController
 
 //----------------------------------------------------------------------------
-- (void) setupWithPipelineMode:(PipelineMode)mode
+- (void) setup
 {
     [self checkPermissions];
 
-    switch (mode)
-    {
-        case PipelineModeMovieFileOutput:
-            self.captureSessionCoordinator = [IDCaptureSessionMovieFileOutputCoordinator new];
-            break;
-
-        case PipelineModeAssetWriter:
-            self.captureSessionCoordinator = [IDCaptureSessionAssetWriterCoordinator new];
-            break;
-
-        default:
-            break;
-    }
-
+    self.captureSessionCoordinator = [IDCaptureSessionAssetWriterCoordinator new];
     [self.captureSessionCoordinator setDelegate:self callbackQueue:dispatch_get_main_queue()];
 
     [self configureInterface];
 }
 
 //----------------------------------------------------------------------------
-- (IBAction)toggleRecording:(id)sender
+- (void) startRunning
+{
+    [self.captureSessionCoordinator startRunning];
+}
+
+//----------------------------------------------------------------------------
+- (void) stopRunning
+{
+    [self.captureSessionCoordinator stopRunning];
+}
+
+//----------------------------------------------------------------------------
+- (IBAction) toggleRecording:(id)sender
 {
     if (self.recording)
     {
@@ -72,21 +69,6 @@
     }
 }
 
-//----------------------------------------------------------------------------
-- (IBAction)closeCamera:(id)sender
-{
-    //TODO: tear down pipeline
-    if (self.recording)
-    {
-        self.dismissing = YES;
-        [self.captureSessionCoordinator stopRecording];
-    }
-    else
-    {
-        [self stopPipelineAndDismiss];
-    }
-}
-
 #pragma mark - Private methods
 
 //----------------------------------------------------------------------------
@@ -95,16 +77,6 @@
     AVCaptureVideoPreviewLayer* previewLayer = [self.captureSessionCoordinator previewLayer];
     previewLayer.frame = self.view.bounds;
     [self.view.layer insertSublayer:previewLayer atIndex:0];
-
-    [self.captureSessionCoordinator startRunning];
-}
-
-//----------------------------------------------------------------------------
-- (void) stopPipelineAndDismiss
-{
-    [self.captureSessionCoordinator stopRunning];
-    [self dismissViewControllerAnimated:YES completion:nil];
-    self.dismissing = NO;
 }
 
 //----------------------------------------------------------------------------
@@ -155,12 +127,6 @@
 
     //Do something useful with the video file available at the outputFileURL
     [Assets copyFileToPhotoLibraryFrom:outputFileURL];
-
-    //Dismiss camera (when user taps cancel while camera is recording)
-    if (self.dismissing)
-    {
-        [self stopPipelineAndDismiss];
-    }
 }
 
 @end

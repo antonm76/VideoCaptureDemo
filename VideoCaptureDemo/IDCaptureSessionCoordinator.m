@@ -99,10 +99,11 @@
 {
     AVCaptureSession* captureSession = [AVCaptureSession new];
 
-    if (![self addDefaultCameraInputToCaptureSession:captureSession])
+    if (![self addCameraAtPosition:AVCaptureDevicePositionFront toCaptureSession:captureSession])
     {
-        NSLog(@"failed to add camera input to capture session");
+        NSLog(@"failed to add front camera input to capture session");
     }
+
     if (![self addDefaultMicInputToCaptureSession:captureSession])
     {
         NSLog(@"failed to add mic input to capture session");
@@ -125,7 +126,6 @@
     else
     {
         BOOL success = [self addInput:cameraDeviceInput toCaptureSession:captureSession];
-        _cameraDevice = cameraDeviceInput.device;
         return success;
     }
 }
@@ -144,6 +144,7 @@
             cameraDeviceInput = [[AVCaptureDeviceInput alloc] initWithDevice:device error:&error];
         }
     }
+
     if (!cameraDeviceInput)
     {
         NSLog(@"No capture device found for requested position");
@@ -155,12 +156,9 @@
         NSLog(@"error configuring camera input: %@", [error localizedDescription]);
         return NO;
     }
-    else
-    {
-        BOOL success = [self addInput:cameraDeviceInput toCaptureSession:captureSession];
-        _cameraDevice = cameraDeviceInput.device;
-        return success;
-    }
+
+    BOOL success = [self addInput:cameraDeviceInput toCaptureSession:captureSession];
+    return success;
 }
 
 //----------------------------------------------------------------------------
@@ -188,10 +186,8 @@
         [captureSession addInput:input];
         return YES;
     }
-    else
-    {
-        NSLog(@"can't add input: %@", [input description]);
-    }
+
+    NSLog(@"can't add input: %@", [input description]);
     return NO;
 }
 
@@ -204,10 +200,8 @@
         [captureSession addOutput:output];
         return YES;
     }
-    else
-    {
-        NSLog(@"can't add output: %@", [output description]);
-    }
+
+    NSLog(@"can't add output: %@", [output description]);
     return NO;
 }
 
