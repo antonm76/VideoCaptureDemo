@@ -1,5 +1,5 @@
 //
-//  IDCaptureSessionCoordinator.h
+//  CaptureSessionManager.h
 //  VideoCaptureDemo
 //
 //  Created by Adriaan Stellingwerff on 1/04/2015.
@@ -10,16 +10,16 @@
 #import <AVFoundation/AVFoundation.h>
 
 //============================================================================
-@protocol IDCaptureSessionCoordinatorDelegate;
+@protocol CaptureSessionManagerDelegate;
 
 //============================================================================
-@interface IDCaptureSessionCoordinator : NSObject
+@interface CaptureSessionManager : NSObject
 
 @property (nonatomic, strong) AVCaptureSession* captureSession;
 @property (nonatomic, strong) dispatch_queue_t delegateCallbackQueue;
-@property (nonatomic, weak) id<IDCaptureSessionCoordinatorDelegate> delegate;
+@property (nonatomic, weak) id<CaptureSessionManagerDelegate> delegate;
 
-- (void) setDelegate:(id<IDCaptureSessionCoordinatorDelegate>)delegate callbackQueue:(dispatch_queue_t)delegateCallbackQueue;
+- (void) setDelegate:(id<CaptureSessionManagerDelegate>)delegate callbackQueue:(dispatch_queue_t)delegateCallbackQueue;
 
 - (BOOL) addInput:(AVCaptureDeviceInput*)input toCaptureSession:(AVCaptureSession*)captureSession;
 - (BOOL) addOutput:(AVCaptureOutput*)output toCaptureSession:(AVCaptureSession*)captureSession;
@@ -35,11 +35,11 @@
 @end
 
 //============================================================================
-@protocol IDCaptureSessionCoordinatorDelegate<NSObject>
+@protocol CaptureSessionManagerDelegate<NSObject>
 
 @required
 
-- (void) coordinatorDidBeginRecording:(IDCaptureSessionCoordinator*)coordinator;
-- (void) coordinator:(IDCaptureSessionCoordinator*)coordinator didFinishRecordingToOutputFileURL:(NSURL*)outputFileURL error:(NSError*)error;
+- (void) coordinatorDidBeginRecording:(CaptureSessionManager*)coordinator;
+- (void) coordinator:(CaptureSessionManager*)coordinator didFinishRecordingToOutputFileURL:(NSURL*)outputFileURL error:(NSError*)error;
 
 @end

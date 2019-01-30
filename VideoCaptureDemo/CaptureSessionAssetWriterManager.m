@@ -1,15 +1,15 @@
 //
-//  IDCaptureSessionAssetWriterCoordinator.m
+//  CaptureSessionAssetWriterManager.m
 //  VideoCaptureDemo
 //
 //  Created by Adriaan Stellingwerff on 9/04/2015.
 //  Copyright (c) 2015 Infoding. All rights reserved.
 //
 
-#import "IDCaptureSessionAssetWriterCoordinator.h"
+#import "CaptureSessionAssetWriterManager.h"
 
 #import <MobileCoreServices/MobileCoreServices.h>
-#import "IDAssetWriterCoordinator.h"
+#import "AssetWriterManager.h"
 #import "VideoCaptureDemo-Swift.h"
 
 //============================================================================
@@ -22,7 +22,7 @@ typedef NS_ENUM(NSInteger, RecordingStatus)
 }; // internal state machine
 
 //============================================================================
-@interface IDCaptureSessionAssetWriterCoordinator () <AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataOutputSampleBufferDelegate, IDAssetWriterCoordinatorDelegate>
+@interface CaptureSessionAssetWriterManager () <AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataOutputSampleBufferDelegate, AssetWriterManagerDelegate>
 
 @property (nonatomic, strong) dispatch_queue_t videoDataOutputQueue;
 @property (nonatomic, strong) dispatch_queue_t audioDataOutputQueue;
@@ -41,12 +41,12 @@ typedef NS_ENUM(NSInteger, RecordingStatus)
 
 @property (nonatomic, retain) __attribute__((NSObject)) CMFormatDescriptionRef outputVideoFormatDescription;
 @property (nonatomic, retain) __attribute__((NSObject)) CMFormatDescriptionRef outputAudioFormatDescription;
-@property (nonatomic, retain) IDAssetWriterCoordinator* assetWriterCoordinator;
+@property (nonatomic, retain) AssetWriterManager* assetWriterCoordinator;
 
 @end
 
 //============================================================================
-@implementation IDCaptureSessionAssetWriterCoordinator
+@implementation CaptureSessionAssetWriterManager
 
 //----------------------------------------------------------------------------
 - (instancetype) init
@@ -81,7 +81,7 @@ typedef NS_ENUM(NSInteger, RecordingStatus)
 
     _recordingURL = Assets.tempFile;
 
-    self.assetWriterCoordinator = [[IDAssetWriterCoordinator alloc] initWithURL:_recordingURL];
+    self.assetWriterCoordinator = [[AssetWriterManager alloc] initWithURL:_recordingURL];
     if (_outputAudioFormatDescription != nil)
     {
         [_assetWriterCoordinator addAudioTrackWithSourceFormatDescription:self.outputAudioFormatDescription settings:_audioCompressionSettings];
@@ -195,7 +195,7 @@ typedef NS_ENUM(NSInteger, RecordingStatus)
 #pragma mark - IDAssetWriterCoordinatorDelegate methods
 
 //----------------------------------------------------------------------------
-- (void) writerCoordinatorDidFinishPreparing:(IDAssetWriterCoordinator*)coordinator
+- (void) writerCoordinatorDidFinishPreparing:(AssetWriterManager*)coordinator
 {
     @synchronized (self)
     {
@@ -209,7 +209,7 @@ typedef NS_ENUM(NSInteger, RecordingStatus)
 }
 
 //----------------------------------------------------------------------------
-- (void) writerCoordinator:(IDAssetWriterCoordinator*)recorder didFailWithError:(NSError*)error
+- (void) writerCoordinator:(AssetWriterManager*)recorder didFailWithError:(NSError*)error
 {
     @synchronized (self)
     {
@@ -219,7 +219,7 @@ typedef NS_ENUM(NSInteger, RecordingStatus)
 }
 
 //----------------------------------------------------------------------------
-- (void) writerCoordinatorDidFinishRecording:(IDAssetWriterCoordinator*)coordinator
+- (void) writerCoordinatorDidFinishRecording:(AssetWriterManager*)coordinator
 {
     @synchronized (self)
     {

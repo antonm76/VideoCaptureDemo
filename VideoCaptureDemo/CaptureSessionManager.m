@@ -1,15 +1,15 @@
 //
-//  IDCaptureSessionCoordinator.m
+//  CaptureSessionManager.m
 //  VideoCaptureDemo
 //
 //  Created by Adriaan Stellingwerff on 1/04/2015.
 //  Copyright (c) 2015 Infoding. All rights reserved.
 //
 
-#import "IDCaptureSessionCoordinator.h"
+#import "CaptureSessionManager.h"
 
 //============================================================================
-@interface IDCaptureSessionCoordinator ()
+@interface CaptureSessionManager ()
 
 @property (nonatomic, strong) dispatch_queue_t sessionQueue;
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer* previewLayer;
@@ -17,7 +17,7 @@
 @end
 
 //============================================================================
-@implementation IDCaptureSessionCoordinator
+@implementation CaptureSessionManager
 
 //----------------------------------------------------------------------------
 - (instancetype) init
@@ -32,7 +32,7 @@
 }
 
 //----------------------------------------------------------------------------
-- (void) setDelegate:(id<IDCaptureSessionCoordinatorDelegate>)delegate callbackQueue:(dispatch_queue_t)delegateCallbackQueue
+- (void) setDelegate:(id<CaptureSessionManagerDelegate>)delegate callbackQueue:(dispatch_queue_t)delegateCallbackQueue
 {
     if (delegate && (delegateCallbackQueue == NULL))
     {

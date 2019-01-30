@@ -1,12 +1,12 @@
 //
-//  IDAssetWriterCoordinator.m
+//  AssetWriterManager.m
 //  VideoCaptureDemo
 //
 //  Created by Adriaan Stellingwerff on 9/04/2015.
 //  Copyright (c) 2015 Infoding. All rights reserved.
 //
 
-#import "IDAssetWriterCoordinator.h"
+#import "AssetWriterManager.h"
 
 typedef NS_ENUM(NSInteger, WriterStatus)
 {
@@ -19,9 +19,9 @@ typedef NS_ENUM(NSInteger, WriterStatus)
     WriterStatusFailed        // terminal state
 }; // internal state machine
 
-@interface IDAssetWriterCoordinator ()
+@interface AssetWriterManager ()
 
-@property (nonatomic, weak) id<IDAssetWriterCoordinatorDelegate> delegate;
+@property (nonatomic, weak) id<AssetWriterManagerDelegate> delegate;
 
 @property (nonatomic, assign) WriterStatus status;
 
@@ -44,8 +44,7 @@ typedef NS_ENUM(NSInteger, WriterStatus)
 
 @end
 
-@implementation IDAssetWriterCoordinator
-
+@implementation AssetWriterManager
 
 - (instancetype) initWithURL:(NSURL*)URL
 {
@@ -118,7 +117,7 @@ typedef NS_ENUM(NSInteger, WriterStatus)
 }
 
 
-- (void) setDelegate:(id<IDAssetWriterCoordinatorDelegate>)delegate callbackQueue:(dispatch_queue_t)delegateCallbackQueue; // delegate is weak referenced
+- (void) setDelegate:(id<AssetWriterManagerDelegate>)delegate callbackQueue:(dispatch_queue_t)delegateCallbackQueue; // delegate is weak referenced
 {
     if (delegate && (delegateCallbackQueue == NULL))
     {

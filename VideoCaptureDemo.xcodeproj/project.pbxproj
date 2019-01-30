@@ -7,12 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		638854751AD6D9F7007277EA /* IDCaptureSessionPipelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 638854741AD6D9F7007277EA /* IDCaptureSessionPipelineViewController.m */; };
-		638854771AD70862007277EA /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 638854761AD70862007277EA /* AssetsLibrary.framework */; };
-		63AC51F81AD6799300E0B680 /* IDCaptureSessionAssetWriterCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AC51F71AD6799300E0B680 /* IDCaptureSessionAssetWriterCoordinator.m */; };
-		63AC51FD1AD6934D00E0B680 /* IDAssetWriterCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AC51FC1AD6934D00E0B680 /* IDAssetWriterCoordinator.m */; };
-		63AC52011AD6C48600E0B680 /* IDPermissionsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AC52001AD6C48600E0B680 /* IDPermissionsManager.m */; };
-		63C7CDA31ACC0A4700CD4024 /* IDCaptureSessionCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C7CDA21ACC0A4700CD4024 /* IDCaptureSessionCoordinator.m */; };
+		638854751AD6D9F7007277EA /* CaptureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 638854741AD6D9F7007277EA /* CaptureViewController.m */; };
+		63AC51F81AD6799300E0B680 /* CaptureSessionAssetWriterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AC51F71AD6799300E0B680 /* CaptureSessionAssetWriterManager.m */; };
+		63AC51FD1AD6934D00E0B680 /* AssetWriterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AC51FC1AD6934D00E0B680 /* AssetWriterManager.m */; };
+		63C7CDA31ACC0A4700CD4024 /* CaptureSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C7CDA21ACC0A4700CD4024 /* CaptureSessionManager.m */; };
 		63C7CDA51ACC0AAC00CD4024 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63C7CDA41ACC0AAC00CD4024 /* AVFoundation.framework */; };
 		63F381CA1ACAC6A8001ECC7E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F381C91ACAC6A8001ECC7E /* main.m */; };
 		63F381CD1ACAC6A8001ECC7E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F381CC1ACAC6A8001ECC7E /* AppDelegate.m */; };
@@ -37,17 +35,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		638854731AD6D9F7007277EA /* IDCaptureSessionPipelineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDCaptureSessionPipelineViewController.h; sourceTree = "<group>"; };
-		638854741AD6D9F7007277EA /* IDCaptureSessionPipelineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDCaptureSessionPipelineViewController.m; sourceTree = "<group>"; };
-		638854761AD70862007277EA /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
-		63AC51F61AD6799300E0B680 /* IDCaptureSessionAssetWriterCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDCaptureSessionAssetWriterCoordinator.h; sourceTree = "<group>"; };
-		63AC51F71AD6799300E0B680 /* IDCaptureSessionAssetWriterCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDCaptureSessionAssetWriterCoordinator.m; sourceTree = "<group>"; };
-		63AC51FB1AD6934D00E0B680 /* IDAssetWriterCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDAssetWriterCoordinator.h; sourceTree = "<group>"; };
-		63AC51FC1AD6934D00E0B680 /* IDAssetWriterCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDAssetWriterCoordinator.m; sourceTree = "<group>"; };
-		63AC51FF1AD6C48600E0B680 /* IDPermissionsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDPermissionsManager.h; sourceTree = "<group>"; };
-		63AC52001AD6C48600E0B680 /* IDPermissionsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDPermissionsManager.m; sourceTree = "<group>"; };
-		63C7CDA11ACC0A4700CD4024 /* IDCaptureSessionCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDCaptureSessionCoordinator.h; sourceTree = "<group>"; };
-		63C7CDA21ACC0A4700CD4024 /* IDCaptureSessionCoordinator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDCaptureSessionCoordinator.m; sourceTree = "<group>"; };
+		638854731AD6D9F7007277EA /* CaptureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureViewController.h; sourceTree = "<group>"; };
+		638854741AD6D9F7007277EA /* CaptureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureViewController.m; sourceTree = "<group>"; };
+		63AC51F61AD6799300E0B680 /* CaptureSessionAssetWriterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureSessionAssetWriterManager.h; sourceTree = "<group>"; };
+		63AC51F71AD6799300E0B680 /* CaptureSessionAssetWriterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureSessionAssetWriterManager.m; sourceTree = "<group>"; };
+		63AC51FB1AD6934D00E0B680 /* AssetWriterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetWriterManager.h; sourceTree = "<group>"; };
+		63AC51FC1AD6934D00E0B680 /* AssetWriterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetWriterManager.m; sourceTree = "<group>"; };
+		63C7CDA11ACC0A4700CD4024 /* CaptureSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureSessionManager.h; sourceTree = "<group>"; };
+		63C7CDA21ACC0A4700CD4024 /* CaptureSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureSessionManager.m; sourceTree = "<group>"; };
 		63C7CDA41ACC0AAC00CD4024 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		63F381C41ACAC6A8001ECC7E /* VideoCaptureDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoCaptureDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F381C81ACAC6A8001ECC7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -71,7 +66,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				638854771AD70862007277EA /* AssetsLibrary.framework in Frameworks */,
 				63C7CDA51ACC0AAC00CD4024 /* AVFoundation.framework in Frameworks */,
 				63F381F11ACAC931001ECC7E /* MobileCoreServices.framework in Frameworks */,
 			);
@@ -90,8 +84,6 @@
 		63AC51F21AD6734500E0B680 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				63AC51FF1AD6C48600E0B680 /* IDPermissionsManager.h */,
-				63AC52001AD6C48600E0B680 /* IDPermissionsManager.m */,
 				8C81A06376231578BE37E3A4 /* PermissionsManager.swift */,
 				8C81AEBFA31ED266A1DD6198 /* UIAlertController+Show.swift */,
 				8C81A94FC5BD52627B9B4497 /* Assets.swift */,
@@ -102,10 +94,10 @@
 		63AC51FA1AD6927700E0B680 /* AVAssetWriter */ = {
 			isa = PBXGroup;
 			children = (
-				63AC51F61AD6799300E0B680 /* IDCaptureSessionAssetWriterCoordinator.h */,
-				63AC51F71AD6799300E0B680 /* IDCaptureSessionAssetWriterCoordinator.m */,
-				63AC51FB1AD6934D00E0B680 /* IDAssetWriterCoordinator.h */,
-				63AC51FC1AD6934D00E0B680 /* IDAssetWriterCoordinator.m */,
+				63AC51F61AD6799300E0B680 /* CaptureSessionAssetWriterManager.h */,
+				63AC51F71AD6799300E0B680 /* CaptureSessionAssetWriterManager.m */,
+				63AC51FB1AD6934D00E0B680 /* AssetWriterManager.h */,
+				63AC51FC1AD6934D00E0B680 /* AssetWriterManager.m */,
 			);
 			name = AVAssetWriter;
 			sourceTree = "<group>";
@@ -114,8 +106,8 @@
 			isa = PBXGroup;
 			children = (
 				63AC51FA1AD6927700E0B680 /* AVAssetWriter */,
-				63C7CDA11ACC0A4700CD4024 /* IDCaptureSessionCoordinator.h */,
-				63C7CDA21ACC0A4700CD4024 /* IDCaptureSessionCoordinator.m */,
+				63C7CDA11ACC0A4700CD4024 /* CaptureSessionManager.h */,
+				63C7CDA21ACC0A4700CD4024 /* CaptureSessionManager.m */,
 			);
 			name = AVFoundation;
 			sourceTree = "<group>";
@@ -145,8 +137,8 @@
 				63C7CDA01ACC090700CD4024 /* AVFoundation */,
 				63F381CB1ACAC6A8001ECC7E /* AppDelegate.h */,
 				63F381CC1ACAC6A8001ECC7E /* AppDelegate.m */,
-				638854731AD6D9F7007277EA /* IDCaptureSessionPipelineViewController.h */,
-				638854741AD6D9F7007277EA /* IDCaptureSessionPipelineViewController.m */,
+				638854731AD6D9F7007277EA /* CaptureViewController.h */,
+				638854741AD6D9F7007277EA /* CaptureViewController.m */,
 				63F381D41ACAC6A8001ECC7E /* Main.storyboard */,
 				63F381D71ACAC6A8001ECC7E /* Images.xcassets */,
 				63F381D91ACAC6A8001ECC7E /* LaunchScreen.xib */,
@@ -158,7 +150,6 @@
 		63F381C71ACAC6A8001ECC7E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				638854761AD70862007277EA /* AssetsLibrary.framework */,
 				63C7CDA41ACC0AAC00CD4024 /* AVFoundation.framework */,
 				63F381F01ACAC931001ECC7E /* MobileCoreServices.framework */,
 				63F381C81ACAC6A8001ECC7E /* Info.plist */,
@@ -286,12 +277,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				63F381CD1ACAC6A8001ECC7E /* AppDelegate.m in Sources */,
-				63AC51F81AD6799300E0B680 /* IDCaptureSessionAssetWriterCoordinator.m in Sources */,
-				63C7CDA31ACC0A4700CD4024 /* IDCaptureSessionCoordinator.m in Sources */,
-				63AC51FD1AD6934D00E0B680 /* IDAssetWriterCoordinator.m in Sources */,
-				63AC52011AD6C48600E0B680 /* IDPermissionsManager.m in Sources */,
+				63AC51F81AD6799300E0B680 /* CaptureSessionAssetWriterManager.m in Sources */,
+				63C7CDA31ACC0A4700CD4024 /* CaptureSessionManager.m in Sources */,
+				63AC51FD1AD6934D00E0B680 /* AssetWriterManager.m in Sources */,
 				63F381CA1ACAC6A8001ECC7E /* main.m in Sources */,
-				638854751AD6D9F7007277EA /* IDCaptureSessionPipelineViewController.m in Sources */,
+				638854751AD6D9F7007277EA /* CaptureViewController.m in Sources */,
 				8C81AFF393130C1B74F4E395 /* PermissionsManager.swift in Sources */,
 				8C81AA66EB8E4DCD7E3700C0 /* UIAlertController+Show.swift in Sources */,
 				8C81A5EB976C511AB440ED3D /* Assets.swift in Sources */,

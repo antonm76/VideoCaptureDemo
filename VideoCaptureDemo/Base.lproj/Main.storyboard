@@ -12,7 +12,7 @@
         <!--Capture Session Pipeline View Controller-->
         <scene sceneID="2hu-5x-iXU">
             <objects>
-                <viewController storyboardIdentifier="captureSessionVC" id="p0b-Es-8Z5" customClass="IDCaptureSessionPipelineViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="captureSessionVC" id="p0b-Es-8Z5" customClass="CaptureViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="93B-Wk-KO6"/>
                         <viewControllerLayoutGuide type="bottom" id="5p1-qL-45F"/>

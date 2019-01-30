@@ -1,5 +1,5 @@
 //
-//  IDCaptureSessionPipelineViewController.h
+//  CaptureViewController.h
 //  VideoCaptureDemo
 //
 //  Created by Adriaan Stellingwerff on 9/04/2015.
@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IDCaptureSessionPipelineViewController : UIViewController
+//============================================================================
+@interface CaptureViewController : UIViewController
 
 - (void) setup;
 

@@ -7,12 +7,12 @@
 //
 
 #import "AppDelegate.h"
-#import "IDCaptureSessionPipelineViewController.h"
+#import "CaptureViewController.h"
 
 //============================================================================
 @interface AppDelegate ()
 
-@property (nonatomic, weak) IDCaptureSessionPipelineViewController* pipelineViewController;
+@property (nonatomic, weak) CaptureViewController* pipelineViewController;
 
 @end
 
@@ -22,7 +22,7 @@
 //----------------------------------------------------------------------------
 - (BOOL) application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
-    self.pipelineViewController = (IDCaptureSessionPipelineViewController*)self.window.rootViewController;
+    self.pipelineViewController = (CaptureViewController*)self.window.rootViewController;
 
     [self.pipelineViewController setup];
     [self.pipelineViewController startRunning];

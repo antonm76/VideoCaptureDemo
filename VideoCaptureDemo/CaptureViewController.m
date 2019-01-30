@@ -1,21 +1,21 @@
 //
-//  IDCaptureSessionPipelineViewController.m
+//  CaptureViewController.m
 //  VideoCaptureDemo
 //
 //  Created by Adriaan Stellingwerff on 9/04/2015.
 //  Copyright (c) 2015 Infoding. All rights reserved.
 //
 
-#import "IDCaptureSessionPipelineViewController.h"
-#import "IDCaptureSessionAssetWriterCoordinator.h"
+#import "CaptureViewController.h"
+#import "CaptureSessionAssetWriterManager.h"
 #import "VideoCaptureDemo-Swift.h"
 
 //TODO: add backgrounding stuff
 
 //============================================================================
-@interface IDCaptureSessionPipelineViewController ()<IDCaptureSessionCoordinatorDelegate>
+@interface CaptureViewController ()<CaptureSessionManagerDelegate>
 
-@property (nonatomic, strong) IDCaptureSessionCoordinator* captureSessionCoordinator;
+@property (nonatomic, strong) CaptureSessionManager* captureSessionCoordinator;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem* recordButton;
 
 @property (nonatomic, assign) BOOL recording;
@@ -23,14 +23,14 @@
 @end
 
 //============================================================================
-@implementation IDCaptureSessionPipelineViewController
+@implementation CaptureViewController
 
 //----------------------------------------------------------------------------
 - (void) setup
 {
     [self checkPermissions];
 
-    self.captureSessionCoordinator = [IDCaptureSessionAssetWriterCoordinator new];
+    self.captureSessionCoordinator = [CaptureSessionAssetWriterManager new];
     [self.captureSessionCoordinator setDelegate:self callbackQueue:dispatch_get_main_queue()];
 
     [self configureInterface];
@@ -112,13 +112,13 @@
 #pragma mark - IDCaptureSessionCoordinatorDelegate methods
 
 //----------------------------------------------------------------------------
-- (void) coordinatorDidBeginRecording:(IDCaptureSessionCoordinator*)coordinator
+- (void) coordinatorDidBeginRecording:(CaptureSessionManager*)coordinator
 {
     self.recordButton.enabled = YES;
 }
 
 //----------------------------------------------------------------------------
-- (void) coordinator:(IDCaptureSessionCoordinator*)coordinator didFinishRecordingToOutputFileURL:(NSURL*)outputFileURL error:(NSError*)error
+- (void) coordinator:(CaptureSessionManager*)coordinator didFinishRecordingToOutputFileURL:(NSURL*)outputFileURL error:(NSError*)error
 {
     [UIApplication sharedApplication].idleTimerDisabled = NO;
 
