@@ -9,35 +9,38 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
+//============================================================================
 @protocol IDCaptureSessionCoordinatorDelegate;
 
+//============================================================================
 @interface IDCaptureSessionCoordinator : NSObject
 
-@property (nonatomic, strong) AVCaptureSession *captureSession;
-@property (nonatomic, strong) AVCaptureDevice *cameraDevice;
+@property (nonatomic, strong) AVCaptureSession* captureSession;
+@property (nonatomic, strong) AVCaptureDevice* cameraDevice;
 @property (nonatomic, strong) dispatch_queue_t delegateCallbackQueue;
 @property (nonatomic, weak) id<IDCaptureSessionCoordinatorDelegate> delegate;
 
-- (void)setDelegate:(id<IDCaptureSessionCoordinatorDelegate>)delegate callbackQueue:(dispatch_queue_t)delegateCallbackQueue;
+- (void) setDelegate:(id<IDCaptureSessionCoordinatorDelegate>)delegate callbackQueue:(dispatch_queue_t)delegateCallbackQueue;
 
-- (BOOL)addInput:(AVCaptureDeviceInput *)input toCaptureSession:(AVCaptureSession *)captureSession;
-- (BOOL)addOutput:(AVCaptureOutput *)output toCaptureSession:(AVCaptureSession *)captureSession;
+- (BOOL) addInput:(AVCaptureDeviceInput*)input toCaptureSession:(AVCaptureSession*)captureSession;
+- (BOOL) addOutput:(AVCaptureOutput*)output toCaptureSession:(AVCaptureSession*)captureSession;
 
-- (void)startRunning;
-- (void)stopRunning;
+- (void) startRunning;
+- (void) stopRunning;
 
-- (void)startRecording;
-- (void)stopRecording;
+- (void) startRecording;
+- (void) stopRecording;
 
-- (AVCaptureVideoPreviewLayer *)previewLayer;
+- (AVCaptureVideoPreviewLayer*) previewLayer;
 
 @end
 
-@protocol IDCaptureSessionCoordinatorDelegate <NSObject>
+//============================================================================
+@protocol IDCaptureSessionCoordinatorDelegate<NSObject>
 
 @required
 
-- (void)coordinatorDidBeginRecording:(IDCaptureSessionCoordinator *)coordinator;
-- (void)coordinator:(IDCaptureSessionCoordinator *)coordinator didFinishRecordingToOutputFileURL:(NSURL *)outputFileURL error:(NSError *)error;
+- (void) coordinatorDidBeginRecording:(IDCaptureSessionCoordinator*)coordinator;
+- (void) coordinator:(IDCaptureSessionCoordinator*)coordinator didFinishRecordingToOutputFileURL:(NSURL*)outputFileURL error:(NSError*)error;
 
 @end

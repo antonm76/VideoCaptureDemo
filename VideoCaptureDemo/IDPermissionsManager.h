@@ -10,7 +10,8 @@
 
 @interface IDPermissionsManager : NSObject
 
-- (void)checkMicrophonePermissionsWithBlock:(void(^)(BOOL granted))block;
-- (void)checkCameraAuthorizationStatusWithBlock:(void(^)(BOOL granted))block;
+- (void) checkMicrophonePermissionsWithBlock:(void (^)(BOOL granted))block;
+
+- (void) checkCameraAuthorizationStatusWithBlock:(void (^)(BOOL granted))block;
 
 @end

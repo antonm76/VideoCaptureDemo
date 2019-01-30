@@ -9,126 +9,156 @@
 #import "IDCaptureSessionPipelineViewController.h"
 #import "IDCaptureSessionAssetWriterCoordinator.h"
 #import "IDCaptureSessionMovieFileOutputCoordinator.h"
-#import "IDFileManager.h"
-#import "IDPermissionsManager.h"
+#import "VideoCaptureDemo-Swift.h"
 
 //TODO: add backgrounding stuff
 
-@interface IDCaptureSessionPipelineViewController () <IDCaptureSessionCoordinatorDelegate>
+//============================================================================
+@interface IDCaptureSessionPipelineViewController ()<IDCaptureSessionCoordinatorDelegate>
 
-@property (nonatomic, strong) IDCaptureSessionCoordinator *captureSessionCoordinator;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *recordButton;
+@property (nonatomic, strong) IDCaptureSessionCoordinator* captureSessionCoordinator;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem* recordButton;
 
 @property (nonatomic, assign) BOOL recording;
 @property (nonatomic, assign) BOOL dismissing;
 
-
 @end
 
+//============================================================================
 @implementation IDCaptureSessionPipelineViewController
 
-
-- (void)setupWithPipelineMode:(PipelineMode)mode
+//----------------------------------------------------------------------------
+- (void) setupWithPipelineMode:(PipelineMode)mode
 {
-    //Let's check permissions for microphone and camera access before we get started
     [self checkPermissions];
-    
-    switch (mode) {
+
+    switch (mode)
+    {
         case PipelineModeMovieFileOutput:
-            _captureSessionCoordinator = [IDCaptureSessionMovieFileOutputCoordinator new];
+            self.captureSessionCoordinator = [IDCaptureSessionMovieFileOutputCoordinator new];
             break;
+
         case PipelineModeAssetWriter:
-            _captureSessionCoordinator = [IDCaptureSessionAssetWriterCoordinator new];
+            self.captureSessionCoordinator = [IDCaptureSessionAssetWriterCoordinator new];
             break;
+
         default:
             break;
     }
-    [_captureSessionCoordinator setDelegate:self callbackQueue:dispatch_get_main_queue()];
+
+    [self.captureSessionCoordinator setDelegate:self callbackQueue:dispatch_get_main_queue()];
+
     [self configureInterface];
 }
 
+//----------------------------------------------------------------------------
 - (IBAction)toggleRecording:(id)sender
 {
-    if(_recording){
-        [_captureSessionCoordinator stopRecording];
-    } else {
+    if (self.recording)
+    {
+        [self.captureSessionCoordinator stopRecording];
+    }
+    else
+    {
         // Disable the idle timer while recording
         [UIApplication sharedApplication].idleTimerDisabled = YES;
-        
+
         self.recordButton.enabled = NO; // re-enabled once recording has finished starting
         self.recordButton.title = @"Stop";
-        
+
         [self.captureSessionCoordinator startRecording];
-        
-        _recording = YES;
+
+        self.recording = YES;
     }
 }
 
+//----------------------------------------------------------------------------
 - (IBAction)closeCamera:(id)sender
 {
     //TODO: tear down pipeline
-    if(_recording){
-        _dismissing = YES;
-        [_captureSessionCoordinator stopRecording];
-    } else {
+    if (self.recording)
+    {
+        self.dismissing = YES;
+        [self.captureSessionCoordinator stopRecording];
+    }
+    else
+    {
         [self stopPipelineAndDismiss];
     }
 }
 
 #pragma mark - Private methods
 
-- (void)configureInterface
+//----------------------------------------------------------------------------
+- (void) configureInterface
 {
-    AVCaptureVideoPreviewLayer *previewLayer = [_captureSessionCoordinator previewLayer];
+    AVCaptureVideoPreviewLayer* previewLayer = [self.captureSessionCoordinator previewLayer];
     previewLayer.frame = self.view.bounds;
     [self.view.layer insertSublayer:previewLayer atIndex:0];
-    
-    [_captureSessionCoordinator startRunning];
+
+    [self.captureSessionCoordinator startRunning];
 }
 
-- (void)stopPipelineAndDismiss
+//----------------------------------------------------------------------------
+- (void) stopPipelineAndDismiss
 {
-    [_captureSessionCoordinator stopRunning];
+    [self.captureSessionCoordinator stopRunning];
     [self dismissViewControllerAnimated:YES completion:nil];
-    _dismissing = NO;
+    self.dismissing = NO;
 }
 
-- (void)checkPermissions
+//----------------------------------------------------------------------------
+- (void) checkPermissions
 {
-    IDPermissionsManager *pm = [IDPermissionsManager new];
-    [pm checkCameraAuthorizationStatusWithBlock:^(BOOL granted) {
-        if(!granted){
+    PermissionsManager* permissionsManager = [PermissionsManager new];
+
+    [permissionsManager checkCameraPermissionWithCompletion:^(BOOL granted)
+    {
+        if (!granted)
+        {
             NSLog(@"we don't have permission to use the camera");
         }
     }];
-    [pm checkMicrophonePermissionsWithBlock:^(BOOL granted) {
-        if(!granted){
+
+    [permissionsManager checkMicrophonePermissionWithCompletion:^(BOOL granted)
+    {
+        if (!granted)
+        {
             NSLog(@"we don't have permission to use the microphone");
+        }
+    }];
+
+    [permissionsManager checkPhotoLibraryPermissionWithCompletion:^(BOOL granted)
+    {
+        if (!granted)
+        {
+            NSLog(@"we don't have permission to use the photo library");
         }
     }];
 }
 
-#pragma mark = IDCaptureSessionCoordinatorDelegate methods
+#pragma mark - IDCaptureSessionCoordinatorDelegate methods
 
-- (void)coordinatorDidBeginRecording:(IDCaptureSessionCoordinator *)coordinator
+//----------------------------------------------------------------------------
+- (void) coordinatorDidBeginRecording:(IDCaptureSessionCoordinator*)coordinator
 {
-    _recordButton.enabled = YES;
+    self.recordButton.enabled = YES;
 }
 
-- (void)coordinator:(IDCaptureSessionCoordinator *)coordinator didFinishRecordingToOutputFileURL:(NSURL *)outputFileURL error:(NSError *)error
+//----------------------------------------------------------------------------
+- (void) coordinator:(IDCaptureSessionCoordinator*)coordinator didFinishRecordingToOutputFileURL:(NSURL*)outputFileURL error:(NSError*)error
 {
     [UIApplication sharedApplication].idleTimerDisabled = NO;
-    
-    _recordButton.title = @"Record";
-    _recording = NO;
-    
+
+    self.recordButton.title = @"Record";
+    self.recording = NO;
+
     //Do something useful with the video file available at the outputFileURL
-    IDFileManager *fm = [IDFileManager new];
-    [fm copyFileToCameraRoll:outputFileURL];
-    
-    
+    [Assets copyFileToPhotoLibraryFrom:outputFileURL];
+
     //Dismiss camera (when user taps cancel while camera is recording)
-    if(_dismissing){
+    if (self.dismissing)
+    {
         [self stopPipelineAndDismiss];
     }
 }
